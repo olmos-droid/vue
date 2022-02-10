@@ -1,10 +1,8 @@
 <template>
-  <div id="app">
-    <input v-model="nuevoComentario" placeholder="Deja tu comentario..." @keypress.enter="addComentario">
-    <p v-for="comentario in comentarios" :key="comentario.id">
-      {{ comentario.contenido }}
-    </p>
-  </div>
+  <input v-model="nuevoComentario" placeholder="Deja tu comentario..." @keypress.enter="addComentario">
+  <p v-for="comentario in comentarios" :key="comentario.id">
+    {{ comentario.contenido }}
+  </p>
 </template>
 
 <script>
@@ -37,9 +35,3 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: sans-serif;
-  text-align: center;
-}
-</style>
