@@ -1,8 +1,7 @@
 import { createApp } from 'vue'
-import router from './router'
+import { router } from './router'
 import App from './App.vue'
 import { createAuth0 } from '@auth0/auth0-vue';
-
 
 
 createApp(App)    

@@ -9,6 +9,11 @@
   "dependencies": {
     "@auth0/auth0-vue": "^1.0.0-beta.0",
     "@auth0/nextjs-auth0": "^1.7.0",
+    "express": "^4.17.2",
+    "express-oauth2-jwt-bearer": "^1.1.0",
+    "jose": "^4.5.0",
+    "next-auth": "^4.2.1",
+    "nodejs-jwt-validator": "^0.1.2",
     "planetscale-node": "^0.3.0",
     "vue": "^3.2.29",
     "vue-router": "^4.0.12"

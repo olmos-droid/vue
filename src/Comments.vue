@@ -26,7 +26,7 @@ export default {
   },
   async created() {
     this.getComentarios();
-    setInterval(this.getComentarios, 2000);
+    //setInterval(this.getComentarios, 2000);
   },
   methods: {
     async getComentarios() {
@@ -34,11 +34,7 @@ export default {
     },
     async addComentario() {
       const token = await this.$auth0.getAccessTokenSilently();
-      const comentario = await (await fetch(`/api/add?contenido=${this.nuevoComentario}`,{
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          })).json();
+      const comentario = await (await fetch(`/api/add?contenido=${this.nuevoComentario}`,{ headers: { Authorization: `Bearer ${token}`}})).json();
       this.comentarios.push({ value: this.nuevoComentario, id: comentario.insertId });
       this.nuevoComentario = '';
     }

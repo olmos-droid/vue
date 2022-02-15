@@ -1,4 +1,7 @@
 {
     "domain": "dev-y8fahynx.us.auth0.com",
-    "client_id": "E1YmsI1kL7dlYpxw7cLUe9BVgUexPjzI"
+    "client_id": "E1YmsI1kL7dlYpxw7cLUe9BVgUexPjzI",
+    "audience": "https://vue-project-gerardfp.vercel.app/api",
+    "useRefreshTokens": true,
+    "cacheLocation": "localstorage"
 }
