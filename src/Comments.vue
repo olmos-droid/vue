@@ -1,43 +1,53 @@
 <template>
-  <div id="app2">
-    <div v-if="isAuthenticated">
-      <p>Hello, {{ user.name }} (<router-link to="/logout">Cerrar sessión</router-link>)</p>
-      <input v-model="nuevoComentario" placeholder="Deja tu comentario..." @keypress.enter="addComentario">      
-    </div>
-    <div v-else>
-      <p>Debes <router-link to="/login">iniciar sesión</router-link> para dejar un comentario</p>
-    </div>
-    <p v-for="comentario in comentarios" :key="comentario.id">
-      {{ comentario.contenido }}
-    </p>
-  </div>
+  <Auth :isAuthenticated="isAuthenticated" :username="user?.name">
+    <input v-model="nuevoContenido" placeholder="Deja tu comentario..." @keypress.enter="addComentario">      
+  </Auth>
+  <Comment v-for="comentario in comentarios" :key="comentario.id" :contenido="comentario.contenido + ' {id:' + comentario.id + '}'" />
 </template>
 
 <script>
+import Comment from './components/Comment.vue'
+import Auth from './components/Auth.vue'
+
 export default {
-  name: 'app',
+  components: {
+    Comment, Auth
+  },
+  
   data () {
     return{
       comentarios: [ { contenido: "Comments are loading... 🥱" }, ],
-      nuevoComentario: '',
+      nuevoContenido: '',
       user: this.$auth0.user,
       isAuthenticated: this.$auth0.isAuthenticated
     }
   },
+  
   async created() {
     this.getComentarios();
     setInterval(this.getComentarios, 2000);
   },
+  
   methods: {
+    
     async getComentarios() {
       this.comentarios = await (await fetch(`/api/get`)).json();
     },
+    
     async addComentario() {
+
+      const position = -1 + this.comentarios.push({ contenido: this.nuevoContenido });
+
       const token = await this.$auth0.getAccessTokenSilently();
-      const comentario = await (await fetch(`/api/add?contenido=${this.nuevoComentario}`,{ headers: { Authorization: `Bearer ${token}`}})).json();
-      this.comentarios.push({ contenido: this.nuevoComentario, id: comentario.insertId });
-      this.nuevoComentario = '';
+      const insertResultado = await (await fetch(`/api/add?contenido=${this.nuevoContenido}`,{ headers: { Authorization: `Bearer ${token}`}})).json();
+
+      this.comentarios[position].id = insertResultado.insertId;
+
+      this.nuevoContenido = '';
     }
   }
 }
 </script>
+
+
+<style src="./Comments.css" scoped />

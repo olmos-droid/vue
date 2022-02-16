@@ -11,9 +11,7 @@ const routes = [
     { path: '/logout', component: Logout },
 ]
 
-export const router = createRouter({
+export default createRouter({
     history: createWebHashHistory(),
     routes,
 })
-
-//export router;
