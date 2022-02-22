@@ -11,7 +11,7 @@ createApp(App)
       domain: "dev-9dydb7no.us.auth0.com",
       client_id: "ZalYv6u0tlVlgUiaFnso3eCeKVkEfSTX",
       redirect_uri: window.location.origin,
-      audience: "https://vue-project-gerardfp.vercel.app/api",
+      audience: "olmosescolatreball",
       useRefreshTokens: true,
       cacheLocation: "localstorage",
     })
