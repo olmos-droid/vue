@@ -36,11 +36,12 @@ export default {
     
     async addComentario() {
 
-      const position = -1 + this.comentarios.push({ contenido: this.nuevoContenido });
+      const position = -1 + this.comentarios.push({ contenido: this.nuevoContenido, id: -1 });
 
       const token = await this.$auth0.getAccessTokenSilently();
       const insertResultado = await (await fetch(`/api/add?contenido=${this.nuevoContenido}`,{ headers: { Authorization: `Bearer ${token}`}})).json();
 
+      console.log(insertResultado)
       this.comentarios[position].id = insertResultado.insertId;
 
       this.nuevoContenido = '';
